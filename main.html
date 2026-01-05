@@ -66,6 +66,7 @@
         background: #111;
         padding: 5px 10px;
         font-family: inherit;
+        margin-right: 8px;
     }
     .audio-btn.on {
         border-color: var(--green);
@@ -73,14 +74,118 @@
         background: rgba(40, 167, 69, 0.1);
     }
 
+    /* ALARM BUTTON */
+    .alarm-btn {
+        border: 1px solid #4b5563;
+        color: #e5e7eb;
+        min-width: 130px;
+        cursor: pointer;
+        border-radius: 4px;
+        background: #111827;
+        padding: 5px 10px;
+        font-family: inherit;
+        font-size: 0.8rem;
+    }
+    .alarm-btn.on {
+        border-color: #22c55e;
+        color: #bbf7d0;
+        background: rgba(34,197,94,0.15);
+    }
+
+    /* STATUS BAR & SECTION BAR */
+    .status-bar {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 4px 20px 2px 20px;
+        font-size: 0.7rem;
+        color: var(--dim);
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        background: rgba(0,0,0,0.25);
+        border-bottom: 1px solid #111827;
+    }
+    .status-bar span {
+        white-space: nowrap;
+    }
+    .section-bar {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 4px 20px;
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #6b7280;
+        border-bottom: 1px solid var(--border);
+        background: radial-gradient(circle at left, rgba(255,255,255,0.03), transparent 55%);
+    }
+
+    /* INDEX ROW */
+    .index-row {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 6px 20px 2px 20px;
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .index-chip {
+        font-size: 0.75rem;
+        padding: 3px 8px;
+        border-radius: 999px;
+        border: 1px solid #374151;
+        background: #020617;
+        color: #e5e7eb;
+        min-width: 80px;
+        text-align: center;
+    }
+    .index-chip.up {
+        border-color: #16a34a;
+        color: #bbf7d0;
+    }
+    .index-chip.down {
+        border-color: #dc2626;
+        color: #fecaca;
+    }
+
+    /* QUICK MUTE ROW */
+    .quick-mute-row {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 4px 20px 0 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        font-size: 0.7rem;
+        color: var(--dim);
+        align-items: center;
+    }
+    .quick-mute-label {
+        margin-right: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+    .qm-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 2px 6px;
+        border-radius: 999px;
+        background: #020617;
+        border: 1px solid #374151;
+        cursor: pointer;
+    }
+    .qm-chip input { width: auto; }
+
     /* GRID */
     .grid-wrapper {
         width: 100%;
-        max-height: 55vh;
+        max-height: 50vh;
         overflow-y: auto;
         display: flex;
         justify-content: center;
-        padding: 20px 0 10px 0;
+        padding: 10px 0 10px 0;
         box-sizing: border-box;
     }
     .grid-container {
@@ -117,6 +222,17 @@
         text-transform: uppercase;
         margin-bottom: 5px;
         letter-spacing: 1px;
+    }
+    .c-title.muted {
+        color: #4b5563;
+        opacity: 0.7;
+    }
+    .c-role {
+        font-size: 0.7rem;
+        color: #6b7280;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 4px;
     }
     .c-time {
         font-size: 2.8rem;
@@ -310,6 +426,10 @@
         flex-wrap: wrap;
         padding-bottom: 4px;
         border-bottom: 1px solid #27272f;
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        background: #181818;
     }
     .news-title {
         font-size: 0.9rem;
@@ -347,14 +467,18 @@
         border-radius: 4px;
     }
     .news-list {
-        max-height: 35vh;
+        max-height: 32vh;
         overflow-y: auto;
         margin-top: 8px;
     }
     .news-item {
-        padding: 6px 0;
+        padding: 6px 6px;
         border-bottom: 1px solid #333;
         font-size: 0.8rem;
+        transition: background 0.15s;
+    }
+    .news-list .news-item:nth-child(odd) {
+        background: rgba(255,255,255,0.01);
     }
     .news-item:last-child { border-bottom: none; }
     .news-item strong {
@@ -366,6 +490,9 @@
         text-decoration: none;
     }
     .news-item a:hover { text-decoration: underline; }
+    .news-item:hover {
+        background: rgba(148,163,184,0.18);
+    }
     .news-time {
         color: var(--dim);
         font-size: 0.75rem;
@@ -442,10 +569,50 @@
         opacity: 0.45;
     }
     .news-item.ff-soon {
-        background: rgba(239, 68, 68, 0.12);
+        background: rgba(239, 68, 68, 0.12) !important;
         border-radius: 4px;
         padding: 6px 8px;
         border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+    .ff-next-banner {
+        font-size: 0.78rem;
+        color: #e5e7eb;
+        padding: 4px 0 4px 0;
+        border-bottom: 1px dashed #374151;
+        margin-top: 4px;
+    }
+
+    /* NOTES */
+    .notes-area {
+        width: 100%;
+        min-height: 260px;
+        max-height: 420px;
+        resize: vertical;
+        background: #020617;
+        border-radius: 6px;
+        border: 1px solid #374151;
+        color: #e5e7eb;
+        padding: 6px 8px;
+        font-family: inherit;
+        font-size: 0.8rem;
+        box-sizing: border-box;
+    }
+    .notes-meta {
+        font-size: 0.7rem;
+        color: #6b7280;
+        margin-top: 4px;
+        text-align: right;
+    }
+
+    @media (max-width: 1100px) {
+        .grid-container {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    @media (max-width: 800px) {
+        .grid-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 </style>
 </head>
@@ -498,10 +665,38 @@
         </div>
     </div>
 
+    <!-- NEWS & CALENDAR OPTIONS -->
+    <div class="cf-grp">
+        <h4>News & Calendar</h4>
+        <div class="cf-row">
+            <span>Yahoo Auto Refresh</span>
+            <select id="news-refresh-select" class="news-select">
+                <option value="0">Off (Manual)</option>
+                <option value="60000">Every 1 min</option>
+                <option value="300000">Every 5 min</option>
+                <option value="900000">Every 15 min</option>
+            </select>
+        </div>
+        <div class="cf-row">
+            <span>Econ Auto Refresh</span>
+            <select id="econ-refresh-select" class="news-select">
+                <option value="0">Off (Manual)</option>
+                <option value="900000">Every 15 min</option>
+                <option value="3600000">Every 60 min</option>
+            </select>
+        </div>
+    </div>
+
     <!-- Visible timeframes -->
     <div class="cf-grp">
         <h4>Visible Timeframes</h4>
         <div id="tf-list" style="max-height:200px;overflow-y:auto;font-size:0.8rem;"></div>
+        <div style="margin-top:8px;font-size:0.7rem;color:#9ca3af;">
+            Presets:
+            <button onclick="applyLayoutPreset('scalp')" style="font-size:0.7rem;">Scalping</button>
+            <button onclick="applyLayoutPreset('swing')" style="font-size:0.7rem;">Swing</button>
+            <button onclick="applyLayoutPreset('all')" style="font-size:0.7rem;">All</button>
+        </div>
     </div>
 
     <button class="rst-btn" onclick="resetTh()">RESET TO DEFAULTS</button>
@@ -516,14 +711,31 @@
     <h3>1. Timers</h3>
     <p>Each card is a candle timeframe. The timer shows how much time is left before the current candle closes.</p>
     <p><strong>ALERT AT</strong> is the number of seconds (or HH:MM:SS) before close where the card turns red and (if not muted) the system speaks an alert.</p>
-    <h3>2. Mute per Timeframe & Visibility</h3>
-    <p>Use the <strong>MUTE</strong> checkbox on each card to silence audio alerts for that timeframe while keeping the visual red highlight.</p>
-    <p>In <strong>SETTINGS → Visible Timeframes</strong> you can hide/show each timeframe card entirely.</p>
-    <h3>3. RTH Session</h3>
-    <p>The RTH card counts down until market open, then until close. It will speak when the alert threshold is hit.</p>
+    <h3>2. Mute & Visibility</h3>
+    <p>Use the <strong>MUTE</strong> checkbox on each card or the quick mute row to silence audio alerts per timeframe. Grey titles indicate muted timers.</p>
+    <p>In <strong>SETTINGS → Visible Timeframes</strong> you can hide/show each timeframe card entirely, or use the presets (Scalping / Swing / All).</p>
+    <h3>3. RTH Session & Alarm</h3>
+    <p>The RTH card counts down until market open, then until close. It will speak when the alert threshold is hit. The 10 AM alarm button plays a short beep at 10:00 AM ET once per day (no TTS).</p>
     <h3>4. News & Economic Calendar</h3>
-    <p>Yahoo has its own date and manual refresh. Economic calendar uses Forex Factory JSON via your local Node server.</p>
-    <p>Impact colors: <span class="ff-badge ff-high">High (Red)</span> <span class="ff-badge ff-medium">Medium (Orange)</span> <span class="ff-badge ff-low">Low (Yellow)</span></p>
+    <p>Yahoo has its own date and refresh (manual or auto). Economic calendar uses the Forex Factory JSON via your local Node server.</p>
+    <p>Impact colors: <span class="ff-badge ff-high">High (Red)</span> <span class="ff-badge ff-medium">Medium (Orange)</span> <span class="ff-badge ff-low">Low (Yellow)</span>.</p>
+    <h3>5. Shortcuts</h3>
+    <ul>
+        <li><strong>S</strong> → Toggle sound</li>
+        <li><strong>N</strong> → Refresh Yahoo news</li>
+        <li><strong>E</strong> → Refresh economic calendar</li>
+        <li><strong>A</strong> → Toggle 10 AM alarm</li>
+    </ul>
+  </div>
+</div>
+
+<!-- NOTES OVERLAY -->
+<div id="notes-ov" class="overlay" onclick="tog('notes-ov',0)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <span class="close-btn" onclick="tog('notes-ov',0)">&times;</span>
+    <h2>Today's Notes</h2>
+    <textarea id="notes-area" class="notes-area" placeholder="Trade plans, levels, mindset reminders..."></textarea>
+    <div id="notes-meta" class="notes-meta">Saved locally</div>
   </div>
 </div>
 
@@ -533,14 +745,38 @@
         <span style="color:var(--dim);font-size:0.7rem">NY TIME (ET)</span><br>
         <span id="ny" style="font-size:1.4rem;font-weight:bold">--:--</span>
     </div>
-    <div>
+    <div style="display:flex;align-items:center;">
         <button id="snd-btn" class="audio-btn" onclick="togSnd()">SOUND: OFF</button>
+        <button id="alarm10-btn" class="alarm-btn" onclick="togAlarm10()">10 AM ALARM: ON</button>
     </div>
     <div class="btn-group">
         <button class="header-btn" onclick="tog('set-ov',1)">SETTINGS</button>
+        <button class="header-btn" onclick="tog('notes-ov',1)">NOTES</button>
         <button class="header-btn help-btn" onclick="tog('hlp-ov',1)">HELP</button>
     </div>
 </div>
+
+<!-- STATUS BAR -->
+<div class="status-bar">
+    <span id="status-market">STATUS: --</span>
+    <span id="status-news">News: Manual</span>
+    <span id="status-econ">Econ: Manual</span>
+</div>
+
+<!-- SECTION BAR -->
+<div class="section-bar">
+    TIMERS · SESSION
+</div>
+
+<!-- INDEX ROW -->
+<div class="index-row">
+    <div class="index-chip" id="idx-spy">SPY --</div>
+    <div class="index-chip" id="idx-qqq">QQQ --</div>
+    <div class="index-chip" id="idx-vix">VIX --</div>
+</div>
+
+<!-- QUICK MUTE ROW -->
+<div class="quick-mute-row" id="quick-mute-row"></div>
 
 <!-- TIMERS GRID -->
 <div class="grid-wrapper">
@@ -552,7 +788,7 @@
     <!-- Yahoo Finance -->
     <div class="news-container">
         <div class="news-header">
-            <div class="news-title">Market News Feed (Yahoo Finance)</div>
+            <div class="news-title">📰 Market News Feed (Yahoo Finance)</div>
             <div class="news-controls">
                 <span style="font-size:0.75rem;color:var(--dim);">Date:</span>
                 <input type="date" id="news-date" class="news-select">
@@ -566,7 +802,7 @@
     <!-- Economic Calendar (Forex Factory via backend) -->
     <div class="news-container">
         <div class="news-header">
-            <div class="news-title">Economic Calendar (Forex Factory)</div>
+            <div class="news-title">📅 Economic Calendar (Forex Factory)</div>
             <div class="econ-controls">
                 <span>ECON DATE:</span>
                 <input type="date" id="econ-date" class="news-select">
@@ -589,6 +825,7 @@
             <label><input type="checkbox" class="ff-imp" value="medium" checked> <span class="ff-badge ff-medium">Orange</span></label>
             <label><input type="checkbox" class="ff-imp" value="low" checked> <span class="ff-badge ff-low">Yellow</span></label>
         </div>
+        <div id="ff-next" class="ff-next-banner">Next event: –</div>
         <div id="ff-list" class="news-list">Loading…</div>
     </div>
 </div>
@@ -596,44 +833,24 @@
 <script>
 /* THEME SYSTEM */
 const THEMES = {
-    bloomberg: {
-        '--bg': '#050608',
-        '--card': '#111318',
-        '--text': '#f5f5f5',
-        '--alert': '#7f1d1d'
-    },
-    nightops: {
-        '--bg': '#020617',
-        '--card': '#0b1120',
-        '--text': '#e5e7eb',
-        '--alert': '#7f1d1d'
-    },
-    minimal: {
-        '--bg': '#111827',
-        '--card': '#1f2933',
-        '--text': '#e5e7eb',
-        '--alert': '#7f1d1d'
-    },
-    terminal: {
-        '--bg': '#020c07',
-        '--card': '#041b11',
-        '--text': '#d1fae5',
-        '--alert': '#14532d'
-    }
+    bloomberg: { '--bg': '#050608', '--card': '#111318', '--text': '#f5f5f5', '--alert': '#7f1d1d' },
+    nightops:  { '--bg': '#020617', '--card': '#0b1120', '--text': '#e5e7eb', '--alert': '#7f1d1d' },
+    minimal:   { '--bg': '#111827', '--card': '#1f2933', '--text': '#e5e7eb', '--alert': '#7f1d1d' },
+    terminal:  { '--bg': '#020c07', '--card': '#041b11', '--text': '#d1fae5', '--alert': '#14532d' }
 };
 
-/* TIMER CONFIG */
+/* TIMER CONFIG (with roles) */
 const config = [
-    { label: "1 Minute",   seconds: 60,    type: "standard", warn: "00:00:10" },
-    { label: "2 Minute",   seconds: 120,   type: "standard", warn: "00:00:15" },
-    { label: "3 Minute",   seconds: 180,   type: "standard", warn: "00:00:20" },
-    { label: "5 Minute",   seconds: 300,   type: "standard", warn: "00:00:30" },
-    { label: "10 Minute",  seconds: 600,   type: "standard", warn: "00:01:00" },
-    { label: "15 Minute",  seconds: 900,   type: "standard", warn: "00:01:30" },
-    { label: "30 Minute",  seconds: 1800,  type: "standard", warn: "00:03:00" },
-    { label: "1 Hour",     seconds: 3600,  type: "standard", warn: "00:05:00" },
-    { label: "2 Hour",     seconds: 7200,  type: "aligned",  warn: "00:10:00" },
-    { label: "4 Hour",     seconds: 14400, type: "aligned",  warn: "00:15:00" }
+    { label: "1 Minute",   seconds: 60,    type: "standard", warn: "00:00:10", role: "Scalp" },
+    { label: "2 Minute",   seconds: 120,   type: "standard", warn: "00:00:15", role: "Scalp" },
+    { label: "3 Minute",   seconds: 180,   type: "standard", warn: "00:00:20", role: "Entry" },
+    { label: "5 Minute",   seconds: 300,   type: "standard", warn: "00:00:30", role: "Entry" },
+    { label: "10 Minute",  seconds: 600,   type: "standard", warn: "00:01:00", role: "Entry" },
+    { label: "15 Minute",  seconds: 900,   type: "standard", warn: "00:01:30", role: "Trend" },
+    { label: "30 Minute",  seconds: 1800,  type: "standard", warn: "00:03:00", role: "Trend" },
+    { label: "1 Hour",     seconds: 3600,  type: "standard", warn: "00:05:00", role: "Context" },
+    { label: "2 Hour",     seconds: 7200,  type: "aligned",  warn: "00:10:00", role: "Context" },
+    { label: "4 Hour",     seconds: 14400, type: "aligned",  warn: "00:15:00", role: "Swing" }
 ];
 
 let offset = 0;
@@ -648,6 +865,24 @@ let visibleTimeframes = [];
 const seenNewsIds = new Set();   // Yahoo
 const seenFFIds = new Set();     // Econ calendar
 
+/* Auto-refresh state */
+let newsRefreshMs = 0;
+let econRefreshMs = 0;
+let newsRefreshTimer = null;
+let econRefreshTimer = null;
+
+/* Status bar state */
+let statusMarket = "--";
+let statusNews = "Manual";
+let statusEcon = "Manual";
+
+/* 10 AM Alarm state */
+let alarm10Enabled = true;
+let alarm10LastDate = localStorage.getItem("alarm10-last") || "";
+
+/* Web Audio for alarm beep */
+let audioCtx = null;
+
 /* Yahoo RSS via AllOrigins */
 const YF_RSS = "https://feeds.finance.yahoo.com/rss/2.0/headline?s=%5EGSPC&region=US&lang=en-US";
 const YF_FEED_BASE = "https://api.allorigins.win/raw?url=";
@@ -655,13 +890,20 @@ const YF_FEED_BASE = "https://api.allorigins.win/raw?url=";
 /* ECON BACKEND (Forex Factory proxy) */
 const ECON_API_BASE = "http://localhost:3000/api/ff-calendar";
 
+/* Index quotes via Yahoo JSON */
+const INDEX_URL = YF_FEED_BASE + encodeURIComponent("https://query1.finance.yahoo.com/v7/finance/quote?symbols=SPY,QQQ,^VIX");
+let indexTimer = null;
+
 /* INIT */
 function init() {
     loadVisibleTimeframes();
     renderTimerGrid();
     buildTimeframeSettingsUI();
     loadTh();
+    initIndex();
+    initNotes();
     initNewsControls();
+    initAlarmButton();
     loop();
     refreshNews(); // initial Yahoo
 }
@@ -733,9 +975,14 @@ function renderTimerGrid() {
               '</div>';
         }
 
+        const roleHTML = '<div class="c-role">'+(c.role || '')+'</div>';
+
         html +=
           '<div class="card" id="c-'+i+'">' +
-            '<div class="c-title">'+c.label+'</div>' +
+            '<div>' +
+              '<div class="c-title" id="title-'+i+'">'+c.label+'</div>' +
+              roleHTML +
+            '</div>' +
             alignHTML +
             '<div>'+timeHTML+'</div>' +
             '<div class="row">' +
@@ -766,6 +1013,7 @@ function renderTimerGrid() {
       '</div>';
 
     document.getElementById("grid").innerHTML = html;
+    buildQuickMuteRow();
 }
 
 /* Rebuild grid when visible timeframes change */
@@ -794,6 +1042,53 @@ function buildTimeframeSettingsUI() {
             visibleTimeframes[idx] = cb.checked;
             saveVisibleTimeframes();
             rebuildGrid();
+        });
+    });
+}
+
+/* Layout presets */
+function applyLayoutPreset(name) {
+    if (name === 'scalp') {
+        visibleTimeframes = config.map((_, i) => i <= 4); // 1–10m
+    } else if (name === 'swing') {
+        visibleTimeframes = config.map((_, i) => i >= 4); // 10m+
+    } else {
+        visibleTimeframes = config.map(() => true);
+    }
+    saveVisibleTimeframes();
+    rebuildGrid();
+    buildTimeframeSettingsUI();
+}
+
+/* QUICK MUTE ROW */
+function buildQuickMuteRow() {
+    const row = document.getElementById('quick-mute-row');
+    if (!row) return;
+    let inner = '<span class="quick-mute-label">QUICK MUTE:</span>';
+    config.forEach((c, i) => {
+        if (!visibleTimeframes[i]) return;
+        const muEl = document.getElementById('mu-'+i);
+        const checked = muEl && muEl.checked;
+        const shortLabel = c.label
+            .replace(" Minute","m")
+            .replace(" Hour","h")
+            .replace(" ","");
+        inner += `
+            <label class="qm-chip">
+              <input type="checkbox" data-qm="${i}" ${checked?'checked':''}>
+              <span>${shortLabel}</span>
+            </label>
+        `;
+    });
+    row.innerHTML = inner;
+    Array.from(row.querySelectorAll('input[data-qm]')).forEach(inp => {
+        inp.addEventListener('change', () => {
+            const idx = parseInt(inp.getAttribute('data-qm'),10);
+            const muEl = document.getElementById('mu-'+idx);
+            if (muEl) {
+                muEl.checked = inp.checked;
+                save();
+            }
         });
     });
 }
@@ -829,6 +1124,9 @@ function loop() {
         if (ampm === "AM" && h === 12) h = 0;
 
         const ms = 999 - now.getMilliseconds();
+
+        // 10 AM alarm check
+        check10Alarm(h, m, s);
 
         // Timer cards
         config.forEach((c, i) => {
@@ -875,6 +1173,12 @@ function loop() {
             const muteEl = document.getElementById('mu-'+i);
             const isMuted = muteEl ? muteEl.checked : false;
 
+            const titleEl = document.getElementById('title-'+i);
+            if (titleEl) {
+                if (isMuted) titleEl.classList.add('muted');
+                else titleEl.classList.remove('muted');
+            }
+
             if (secRem === thresh) {
                 if (lastSpeak['c-'+i] !== secRem && !isMuted) {
                     speak(c.label + " candle closing in " + thresh + " seconds");
@@ -911,10 +1215,13 @@ function loop() {
             const rwEl = document.getElementById('rw');
             const rthThresh = parseTime(rwEl ? rwEl.value : "00:15:00");
 
+            let phase = "Closed";
+
             if (nowS >= oS && nowS < cS) {
                 const diff = cS - nowS - 1;
                 trthEl.innerText = fmt(diff, true);
                 srthEl.innerText = "MARKET OPEN";
+                phase = "RTH";
 
                 if (diff <= rthThresh) {
                     rCardEl.classList.add("alert");
@@ -926,15 +1233,26 @@ function loop() {
                     speak("Session closing in " + rthThresh + " seconds");
                     lastSpeak['rth'] = diff;
                 }
+
+                rCardEl.style.borderColor = "#22c55e";
             } else {
                 rCardEl.classList.remove("alert");
                 if (nowS < oS) {
                     trthEl.innerText = fmt(oS - nowS - 1, true);
                     srthEl.innerText = "PRE-MARKET";
+                    phase = "Premarket";
+                    rCardEl.style.borderColor = "#3b82f6";
                 } else {
                     trthEl.innerText = "CLOSED";
                     srthEl.innerText = "SESSION ENDED";
+                    phase = "Closed";
+                    rCardEl.style.borderColor = "var(--border)";
                 }
+            }
+
+            if (phase !== statusMarket) {
+                statusMarket = phase;
+                updateStatusBar();
             }
         }
     } catch (e) {
@@ -1014,17 +1332,16 @@ function upTh(p, v) {
     } else {
         document.documentElement.style.setProperty(p, v);
         localStorage.setItem(p, v);
-        if (p === '--bg') { const i = document.getElementById('p-bg'); if (i) i.value = v; }
+        if (p === '--bg')  { const i = document.getElementById('p-bg'); if (i) i.value = v; }
         if (p === '--card'){ const i = document.getElementById('p-cd'); if (i) i.value = v; }
         if (p === '--text'){ const i = document.getElementById('p-tx'); if (i) i.value = v; }
-        if (p === '--alert'){ const i = document.getElementById('p-al'); if (i) i.value = v; }
+        if (p === '--alert'){const i = document.getElementById('p-al'); if (i) i.value = v; }
     }
 }
 function loadTh() {
     const themeKey = localStorage.getItem('theme') || 'bloomberg';
     applyTheme(themeKey, false);
 
-    // Apply stored overrides (if user used color pickers before)
     ['--bg','--card','--text','--alert'].forEach(k => {
         const v = localStorage.getItem(k);
         if (v) {
@@ -1065,6 +1382,61 @@ function getTodayNY() {
     return `${y}-${m}-${d}`;
 }
 
+/* 10 AM ALARM */
+function initAlarmButton() {
+    const saved = localStorage.getItem("alarm10");
+    if (saved === "0") alarm10Enabled = false;
+    updateAlarmButton();
+}
+function updateAlarmButton() {
+    const btn = document.getElementById("alarm10-btn");
+    if (!btn) return;
+    if (alarm10Enabled) {
+        btn.classList.add("on");
+        btn.innerText = "10 AM ALARM: ON";
+    } else {
+        btn.classList.remove("on");
+        btn.innerText = "10 AM ALARM: OFF";
+    }
+}
+function togAlarm10() {
+    alarm10Enabled = !alarm10Enabled;
+    localStorage.setItem("alarm10", alarm10Enabled ? "1" : "0");
+    updateAlarmButton();
+}
+function check10Alarm(h, m, s) {
+    if (!alarm10Enabled) return;
+    const today = getTodayNY();
+    if (today === alarm10LastDate) return;
+    if (h === 10 && m === 0 && s === 0) {
+        playBeep();
+        alarm10LastDate = today;
+        localStorage.setItem("alarm10-last", today);
+    }
+}
+function playBeep() {
+    try {
+        if (!audioCtx) {
+            const Ctx = window.AudioContext || window.webkitAudioContext;
+            if (!Ctx) return;
+            audioCtx = new Ctx();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = "sine";
+        osc.frequency.value = 880;
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        const now = audioCtx.currentTime;
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.0);
+        osc.start(now);
+        osc.stop(now + 1.0);
+    } catch (e) {
+        console.warn("Beep error:", e);
+    }
+}
+
 /* ---------------------- NEWS: YAHOO ---------------------- */
 function refreshYahoo() {
     const dateInput = document.getElementById("news-date");
@@ -1083,7 +1455,7 @@ function refreshYahoo() {
                 return;
             }
 
-            const items = Array.from(doc.querySelectorAll("item")).slice(0, 25);
+            const items = Array.from(doc.querySelectorAll("item")).slice(0, 40);
             const listEl = document.getElementById("news-list");
             if (!listEl) return;
 
@@ -1175,6 +1547,8 @@ function refreshEcon() {
 
     const listEl = document.getElementById("ff-list");
     if (listEl) listEl.innerText = "Loading…";
+    const nextEl = document.getElementById("ff-next");
+    if (nextEl) nextEl.innerText = "Next event: …";
 
     const url =
         ECON_API_BASE +
@@ -1192,6 +1566,8 @@ function refreshEcon() {
             let html = "";
             let firstNew = null;
             const now = new Date();
+            let nextUpcoming = null;
+            let nextDiff = Infinity;
 
             data.forEach(ev => {
                 try {
@@ -1217,6 +1593,11 @@ function refreshEcon() {
                     if (minsDiff < 0) extraClass = " ff-past";
                     else if (minsDiff <= 30) extraClass = " ff-soon";
 
+                    if (minsDiff >= 0 && minsDiff < nextDiff) {
+                        nextDiff = minsDiff;
+                        nextUpcoming = { ev, timeLabel, level };
+                    }
+
                     const country = ev.country || "";
                     const title = ev.title || "Event";
 
@@ -1238,6 +1619,26 @@ function refreshEcon() {
             });
 
             el.innerHTML = html || "No events found for selected filters.";
+
+            const nextEl2 = document.getElementById("ff-next");
+            if (nextEl2) {
+                if (nextUpcoming) {
+                    const ev = nextUpcoming.ev;
+                    const level = nextUpcoming.level;
+                    const timeLabel = nextUpcoming.timeLabel;
+                    const what =
+                        level === "high" ? "High impact" :
+                        level === "medium" ? "Medium impact" : "Low impact";
+                    const country = ev.country || "";
+                    const title = ev.title || "event";
+                    const mins = Math.round(nextDiff);
+                    const minsText = mins <= 1 ? "now" : `in ${mins} min`;
+                    nextEl2.innerText =
+                        `Next ${what} event: ${timeLabel} ${country ? "["+country+"] " : ""}${title} (${minsText})`;
+                } else {
+                    nextEl2.innerText = "No upcoming events for the rest of the selected day.";
+                }
+            }
 
             if (firstNew && audioOn && newsSpeechOn) {
                 const level = impactToLevel(firstNew.impact);
@@ -1267,12 +1668,44 @@ function refreshEcon() {
             console.warn("Econ calendar fetch error:", err);
             const el = document.getElementById("ff-list");
             if (el) el.innerText = "Could not load economic calendar.";
+            const nextEl2 = document.getElementById("ff-next");
+            if (nextEl2) nextEl2.innerText = "Backend offline or unreachable.";
         });
 }
 
 /* Combined manual refresh for Yahoo */
 function refreshNews() {
     refreshYahoo();
+}
+
+/* NEWS CONTROLS & AUTO REFRESH */
+function setNewsAutoRefresh(ms) {
+    if (newsRefreshTimer) clearInterval(newsRefreshTimer);
+    newsRefreshMs = ms || 0;
+    localStorage.setItem("news-refresh-ms", String(newsRefreshMs));
+    if (newsRefreshMs > 0) {
+        newsRefreshTimer = setInterval(refreshNews, newsRefreshMs);
+    }
+    statusNews = newsRefreshMs ? `Auto ${Math.round(newsRefreshMs/60000)}m` : "Manual";
+    updateStatusBar();
+    const sel = document.getElementById("news-refresh-select");
+    if (sel && String(newsRefreshMs) !== sel.value) {
+        sel.value = String(newsRefreshMs);
+    }
+}
+function setEconAutoRefresh(ms) {
+    if (econRefreshTimer) clearInterval(econRefreshTimer);
+    econRefreshMs = ms || 0;
+    localStorage.setItem("econ-refresh-ms", String(econRefreshMs));
+    if (econRefreshMs > 0) {
+        econRefreshTimer = setInterval(refreshEcon, econRefreshMs);
+    }
+    statusEcon = econRefreshMs ? `Auto ${Math.round(econRefreshMs/60000)}m` : "Manual";
+    updateStatusBar();
+    const sel = document.getElementById("econ-refresh-select");
+    if (sel && String(econRefreshMs) !== sel.value) {
+        sel.value = String(econRefreshMs);
+    }
 }
 
 /* NEWS CONTROLS */
@@ -1344,6 +1777,33 @@ function initNewsControls() {
         }
     }
 
+    // Auto-refresh selects
+    const savedNewsMs = parseInt(localStorage.getItem("news-refresh-ms") || "0",10) || 0;
+    const savedEconMs = parseInt(localStorage.getItem("econ-refresh-ms") || "0",10) || 0;
+
+    setNewsAutoRefresh(savedNewsMs);
+    setEconAutoRefresh(savedEconMs);
+
+    const newsSel = document.getElementById("news-refresh-select");
+    if (newsSel && !newsSel.dataset.bound) {
+        newsSel.dataset.bound = "1";
+        newsSel.value = String(newsRefreshMs);
+        newsSel.addEventListener("change", () => {
+            const ms = parseInt(newsSel.value,10) || 0;
+            setNewsAutoRefresh(ms);
+        });
+    }
+
+    const econSel = document.getElementById("econ-refresh-select");
+    if (econSel && !econSel.dataset.bound) {
+        econSel.dataset.bound = "1";
+        econSel.value = String(econRefreshMs);
+        econSel.addEventListener("change", () => {
+            const ms = parseInt(econSel.value,10) || 0;
+            setEconAutoRefresh(ms);
+        });
+    }
+
     // Initial econ load
     refreshEcon();
 }
@@ -1363,12 +1823,88 @@ function togNewsVoice() {
     localStorage.setItem("news-voice", newsSpeechOn ? "1" : "0");
 }
 
+/* INDEX QUOTES */
+function initIndex() {
+    fetchIndexQuotes();
+    indexTimer = setInterval(fetchIndexQuotes, 60000);
+}
+function fetchIndexQuotes() {
+    fetch(INDEX_URL)
+        .then(r => r.json())
+        .then(data => {
+            const result = data && data.quoteResponse && Array.isArray(data.quoteResponse.result)
+                ? data.quoteResponse.result
+                : [];
+            const bySymbol = {};
+            result.forEach(q => { bySymbol[q.symbol] = q; });
+            renderIndexQuote("SPY", "idx-spy", bySymbol["SPY"]);
+            renderIndexQuote("QQQ", "idx-qqq", bySymbol["QQQ"]);
+            renderIndexQuote("VIX", "idx-vix", bySymbol["^VIX"]);
+        })
+        .catch(err => {
+            console.warn("Index fetch error:", err);
+        });
+}
+function renderIndexQuote(symbol, elId, q) {
+    const el = document.getElementById(elId);
+    if (!el) return;
+    el.classList.remove("up","down");
+    if (!q || q.regularMarketPrice == null) {
+        el.textContent = symbol + " --";
+        return;
+    }
+    const price = Number(q.regularMarketPrice);
+    const chgPct = Number(q.regularMarketChangePercent || 0);
+    const pctStr = (chgPct >= 0 ? "+" : "") + chgPct.toFixed(2) + "%";
+    el.textContent = `${symbol} ${price.toFixed(2)} (${pctStr})`;
+    if (chgPct > 0.05) el.classList.add("up");
+    else if (chgPct < -0.05) el.classList.add("down");
+}
+
+/* NOTES */
+function initNotes() {
+    const ta = document.getElementById("notes-area");
+    const meta = document.getElementById("notes-meta");
+    if (!ta) return;
+    ta.value = localStorage.getItem("scratch-notes") || "";
+    if (meta) meta.innerText = "Saved locally · " + (ta.value.length || 0) + " chars";
+    ta.addEventListener("input", () => {
+        localStorage.setItem("scratch-notes", ta.value);
+        if (meta) meta.innerText = "Saved locally · " + (ta.value.length || 0) + " chars";
+    });
+}
+
+/* STATUS BAR */
+function updateStatusBar() {
+    const mEl = document.getElementById("status-market");
+    const nEl = document.getElementById("status-news");
+    const eEl = document.getElementById("status-econ");
+    if (mEl) mEl.innerText = "STATUS: " + statusMarket;
+    if (nEl) nEl.innerText = "News: " + statusNews;
+    if (eEl) eEl.innerText = "Econ: " + statusEcon;
+}
+
 /* GLOBAL LOGGING */
 window.addEventListener("error", (e) => {
     console.warn("Global JS error:", e.message);
 });
 window.addEventListener("unhandledrejection", (e) => {
     console.warn("Unhandled promise rejection:", e.reason);
+});
+
+/* KEYBOARD SHORTCUTS */
+document.addEventListener("keydown", (e) => {
+    const tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : "";
+    if (tag === "INPUT" || tag === "TEXTAREA") return;
+    if (e.key === "s" || e.key === "S") {
+        togSnd();
+    } else if (e.key === "n" || e.key === "N") {
+        refreshNews();
+    } else if (e.key === "e" || e.key === "E") {
+        refreshEcon();
+    } else if (e.key === "a" || e.key === "A") {
+        togAlarm10();
+    }
 });
 
 /* START */
